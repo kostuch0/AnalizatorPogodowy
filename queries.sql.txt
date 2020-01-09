@@ -1,0 +1,11 @@
+/*Przydatne kwerendy*/
+
+
+select DISTINCT kod_stacji, nazwa_stacji from dane
+
+insert into stacje (kod_stacji,nazwa_stacji) select DISTINCT kod_stacji, nazwa_stacji from dane ORDER by nazwa_stacji
+
+select stacje.nazwa_stacji,max_temp_dob, dzien,miesiac,rok from dane INNER JOIN stacje on dane.kod_stacji = stacje.kod_stacji where stacje.id =22
+
+
+SELECT stacje.nazwa_stacji,max_temp_dob,dzien,miesiac,rok from dane, stacje where dane.kod_stacji = stacje.kod_stacji and stacje.Id= 22
