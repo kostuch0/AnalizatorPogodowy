@@ -1,0 +1,23 @@
+{
+  "name": "Server",
+  "version": "1.0.0",
+  "description": "Testowa aplikacja react.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "node server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "Grzegorz Kostecki",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^5.0.0",
+    "currently": "0.0.8",
+    "express": "^4.17.1",
+    "react-router-dom": "^5.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  }
+}

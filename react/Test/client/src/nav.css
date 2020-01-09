@@ -1,0 +1,52 @@
+.app-header{
+    display: flex;
+    align-items: flex-start;
+}
+.button{
+    margin-left: 15px;
+    border-width: 0.05vmax ;
+    /*border-style: solid;*/
+    padding: 5px;
+    font-size: 25px;
+    box-sizing: border-box;
+    color: rgb(185, 185, 185);
+    height: 4.7vmin;
+    cursor: pointer;
+    transition: 250ms;
+
+}
+.container{
+    display:flex;
+    margin-top: 150px;
+    margin-bottom: 10px;
+
+    
+}
+.App{
+    background-color: rgba(21, 21, 21, 0.5);
+
+    height: 100vh;
+    
+}
+.logo{
+    background: url("logo1.1.png");
+    background-size: 25vw 10vh;
+    width: 25vw;
+    height: 10vh;
+    position: absolute;
+    cursor: pointer;
+    top:25px;
+}
+.button:hover{
+    border-width: 0.05vmax ;
+    border-radius: 8px;
+    color: white;
+    transition: 250ms;
+    font-size: 30px;
+    
+
+}
+a{
+    margin-left: 0.01vmax;
+    margin-right: 0.01vmax;
+}
