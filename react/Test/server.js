@@ -1,4 +1,8 @@
 const express = require('express');
+var sqlite3 = require('sqlite3');
+var db = new sqlite3.Database('DanePogodowe2.db');
+
+var avc = [];
 
 const app = express();
 
@@ -14,6 +18,34 @@ app.get('/get/data',(req, res)=>{
 app.get('/', (req, res) => res.send(
    '<center><h2>A czego tu szukasz? Pewnie jakiego diabła!</h2></center>'
 ))
+
+app.get('/baza', (req, res) =>{
+    db.serialize(function () {
+         db.all('SELECT * FROM stacje', function (err, row) {
+         console.log(row);
+        res.json(row)
+      })
+    })
+})
+app.get('/nazwa/:kod_stacji', (req, res) =>{
+    db.serialize(function () {
+    db.all('SELECT * FROM dane  WHERE kod_stacji = '+ req.params.kod_stacji,
+     function (err, row) {
+   console.log(row);
+  res.json(row);
+     })
+    })
+})
+app.get('/nazwa/:kod_stacji/:rok_pocz/:rok_zak', (req, res) =>{
+    db.serialize(function () {
+         db.all('SELECT * FROM dane  WHERE kod_stacji = '+ req.params.kod_stacji + ' AND rok >='
+          + req.param("rok_pocz") + " AND rok <= " + req.params.rok_zak,
+           function (err, row) {
+         console.log(row);
+        res.json(row)
+      })
+    })
+})  
 
 const port = 9988;
 
