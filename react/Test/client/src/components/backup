@@ -1,0 +1,13 @@
+<Plot
+            data={[
+              {
+                x: [2001, 2002, 2003],
+                y: [21, 3, 7],
+                type: 'scatter',
+                mode: 'lines+markers',
+                marker: {color: 'red'},
+              },
+              
+            ]}
+            layout={ {width: 800, height: 600, title: 'Piękny wykres danych bez sensu'} }
+            />

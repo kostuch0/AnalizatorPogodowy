@@ -22,7 +22,7 @@ app.get('/', (req, res) => res.send(
 app.get('/baza', (req, res) =>{
     db.serialize(function () {
          db.all('SELECT * FROM stacje', function (err, row) {
-         console.log(row);
+        // console.log(row);
         res.json(row)
       })
     })
@@ -31,7 +31,7 @@ app.get('/nazwa/:kod_stacji', (req, res) =>{
     db.serialize(function () {
     db.all('SELECT * FROM dane  WHERE kod_stacji = '+ req.params.kod_stacji,
      function (err, row) {
-   console.log(row);
+   //console.log(row);
   res.json(row);
      })
     })
@@ -41,7 +41,7 @@ app.get('/nazwa/:kod_stacji/:rok_pocz/:rok_zak', (req, res) =>{
          db.all('SELECT * FROM dane  WHERE kod_stacji = '+ req.params.kod_stacji + ' AND rok >='
           + req.param("rok_pocz") + " AND rok <= " + req.params.rok_zak,
            function (err, row) {
-         console.log(row);
+         //console.log(row);
         res.json(row)
       })
     })

@@ -3,7 +3,9 @@ import './App.css';
 import './nav.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import About from './components/about/about';
-import Home from './components/home/home'
+import Home from './components/home/home';
+import Pick from './components/pick/pick';
+
 const Nav =()=> {
   const changeLocation = (res) =>{
     var clicked = res.currentTarget.id
@@ -22,6 +24,10 @@ const Nav =()=> {
       case "pogoda":
         console.log(clicked)
         window.history.pushState({}, null, '../pogoda');
+        break;
+      case "wybierz":
+        console.log(clicked);
+        window.location.href = '../wybierz';
         break;
       default:
         window.location.href = '../'+clicked;
@@ -46,8 +52,8 @@ const Nav =()=> {
             <div onClick={changeLocation} class="button" id='about'>
                <a>O autorach!</a> 
             </div>
-            <div onClick={changeLocation} class="button" id='dupa'>
-               <a>O autorach!</a> 
+            <div onClick={changeLocation} class="button" id='wybierz'>
+               <a>Wybierz stacje</a> 
             </div>
         </div>
         <Router>
@@ -56,8 +62,10 @@ const Nav =()=> {
           <Route path="/about" component={About} />
 
           <Route path="/" exact component={Home} />
+
           <Route path="/home" exact component={Home} />
 
+          <Route path="/wybierz" exact component={Pick} />
 
           </Switch>
         </Router>
