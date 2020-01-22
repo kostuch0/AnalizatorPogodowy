@@ -27,6 +27,22 @@ app.get('/baza', (req, res) =>{
       })
     })
 })
+
+app.get('/baza/:kod_stacji', (req, res) =>{
+  let temps = [];
+  db.serialize(function () {
+  db.all('SELECT max_temp_dob FROM dane  WHERE kod_stacji = '+ req.params.kod_stacji,
+   function (err, rows) {
+//  console.log(row[1]);
+  rows.forEach((row)=>{
+    temps.push(Object.values(row)[0]);
+  })
+  console.log(temps);
+  res.json(temps);
+   })
+  })
+})
+
 app.get('/nazwa/:kod_stacji', (req, res) =>{
     db.serialize(function () {
     db.all('SELECT * FROM dane  WHERE kod_stacji = '+ req.params.kod_stacji,
