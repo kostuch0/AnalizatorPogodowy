@@ -1,7 +1,11 @@
 select {
     background-color: rgb(255, 255, 255);
-    width: 600px; 
+    width: 400px; 
     border-style: solid; 
     border-color: #0061FF; 
     border-width: 2px
+}
+.content{
+    border-style: solid;
+    display: flex;
 }

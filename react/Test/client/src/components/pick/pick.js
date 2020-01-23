@@ -54,8 +54,8 @@ const Pick = ()=> {
   return (
     
   
-    <div class='content'>
-    {station &&      <a>          
+    <div className='content'>
+    {station &&      <div className='wykres'>           
                     
                     <form>
                     <input type='date'  min='2001-01-01' max='2020-01-01' name='od'></input>
@@ -66,7 +66,7 @@ const Pick = ()=> {
                         {station.map(station =>
                             <option value={station.kod_stacji} title={station.nazwa_stacji}>{station.Id} - {station.nazwa_stacji}</option>)}
                       </optgroup>
-                    </select></a>
+                    </select></div>
     }
 
     {!station &&
@@ -77,11 +77,28 @@ const Pick = ()=> {
             data={[
               {
                 x: daty,
-                y: data,
+                y: data[0],
                 type: 'scatter',
-                mode: 'lines+markers',
-                marker: {color: 'red'},
+                mode: 'lines',
+                marker: {color: 'blue'},
+                name: "Minimalna"
               },
+              {
+                x: daty,
+                y: data[1],
+                type: 'scatter',
+                mode: 'lines',
+                marker: {color: 'green'},
+                name: "Średnia"
+              },
+              {
+                x: daty,
+                y: data[2],
+                type: 'scatter',
+                mode: 'lines',
+                marker: {color: 'red'},
+                name: "Maksymalna"
+              }
               
               
             ]}
