@@ -7,6 +7,7 @@ const Pick = ()=> {
     const [isLoading, setisLoading] = useState(false)
     const [data, setData] = useState()
     const [daty,setDaty] = useState()
+    const [nazwa,setNazwa] = useState()
 
     let temps = [];
     let dates = [];
@@ -15,13 +16,16 @@ const Pick = ()=> {
         setisLoading(true);
         let temp = await fetch('/baza').then(res => res.json());
         setisLoading(false);
-        console.log(temp);
+        //console.log(temp);
         setStation(temp);
     }
     const getChange = (e) =>{
-      console.log(e.target.value)
+      //console.log(e.target.value)
       //setData([10,11].push(12))
-
+      station.map(station => {if(station.kod_stacji === e.target.value){
+          setNazwa(station.nazwa_stacji)
+        }}
+        )
       loadTemps(e.target.value);
       
     }
@@ -31,8 +35,8 @@ const Pick = ()=> {
       dates = [];
       temps = await fetch('/baza/temp/' + code).then(res => res.json());
       dates = await fetch('/baza/data/' + code).then(res => res.json());
-      console.log("Tablica temperatur: " + temps);
-      console.log("Tablica dat: " + dates);
+      //console.log("Tablica temperatur: " + temps);
+      //console.log("Tablica dat: " + dates);
       setData(temps)
       setDaty(dates)
     }
@@ -51,7 +55,7 @@ const Pick = ()=> {
                     <select name="stacje" onChange={getChange}>
                       <optgroup label="Stacja">
                         {station.map(station =>
-                            <option value={station.kod_stacji}>{station.Id} - {station.nazwa_stacji}</option>)}
+                            <option value={station.kod_stacji} title={station.nazwa_stacji}>{station.Id} - {station.nazwa_stacji}</option>)}
                       </optgroup>
                     </select>
     }
@@ -71,7 +75,7 @@ const Pick = ()=> {
               
               
             ]}
-            layout={ {width: 800, height: 600, title: 'Piękny wykres danych bez sensu'} }
+            layout={ {width: 800, height: 600, title: 'Wykres temperaturowy: '+nazwa} }
             />
       }
     </div>
