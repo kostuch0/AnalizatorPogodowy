@@ -8,6 +8,9 @@ const Pick = ()=> {
     const [data, setData] = useState()
     const [daty,setDaty] = useState()
     const [nazwa,setNazwa] = useState()
+    const [dataStart, setDataStart]= useState('2001','01','01')
+    const [dataStop, setDataStop]= useState('2020','01','01')
+
 
     let temps = [];
     let dates = [];
@@ -29,15 +32,23 @@ const Pick = ()=> {
       loadTemps(e.target.value);
       
     }
+    const fromDateChange = (e) =>{
+      setDataStart(e.target.value.split())
+    }
+    const toDateChange = (e) =>{
+      setDataStop(e.target.value.split())
+    }
+
+
  
     const loadTemps = async(code) =>{
       temps = [];
       dates = [];
       var tempDates = [];
-      temps = await fetch('/baza/temp/' + code).then(res => res.json());
+      temps = await fetch('/baza/temp/' + code  ).then(res => res.json());
       tempDates = await fetch('/baza/data/' + code).then(res => res.json());
       console.log(tempDates);
-
+      //+'/' + dataStart[0] + '/' + dataStart[1] + '/' + dataStart[2] + '/' +dataStop[0]+ '/' + dataStop[1]+ '/' + dataStop[2] 
       tempDates.map(tempDates=>{dates.push(tempDates.rok + "/" + tempDates.miesiac + "/" + tempDates.dzien)})
 
       //console.log("Tablica temperatur: " + temps);
@@ -57,9 +68,10 @@ const Pick = ()=> {
     <div className='content'>
     {station &&      <div className='wykres'>           
                     
-                    <form>
-                    <input type='date'  min='2001-01-01' max='2020-01-01' name='od'></input>
-                    <input type='date'  min='2001-01-01' max='2020-01-01' name='do'></input>
+                    <form><br></br>Data początkowa<br></br>
+                    <input type='date'  min='2001-01-01' max='2020-01-01' name='od' onChange={fromDateChange} ></input><br></br>
+                    Data końcowa<br></br>
+                    <input type='date'  min='2001-01-01' max='2020-01-01' name='do' onChange={toDateChange} ></input>
                     </form>
                     <select name="stacje" onChange={getChange}>
                       <optgroup label="Stacja">
@@ -77,11 +89,11 @@ const Pick = ()=> {
             data={[
               {
                 x: daty,
-                y: data[0],
+                y: data[2],
                 type: 'scatter',
                 mode: 'lines',
-                marker: {color: 'blue'},
-                name: "Minimalna"
+                marker: {color: 'red'},
+                name: "Maksymalna"
               },
               {
                 x: daty,
@@ -93,12 +105,14 @@ const Pick = ()=> {
               },
               {
                 x: daty,
-                y: data[2],
+                y: data[0],
                 type: 'scatter',
                 mode: 'lines',
-                marker: {color: 'red'},
-                name: "Maksymalna"
-              }
+                marker: {color: 'blue'},
+                name: "Minimalna"
+              },
+
+
               
               
             ]}

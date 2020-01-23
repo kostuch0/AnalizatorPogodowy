@@ -55,11 +55,14 @@ console.log(temps[2]);
 })
 
 app.get('/baza/temp/:kod_stacji/:rokp/:miesp/:dzienp/:rokz/:miesz/:dzienz', (req, res) =>{
-  let date = [];
+  let tempsMin = [];
+  let tempsSr = [];
+  let tempsMax = [];
+  let temps = [];
   db.serialize(function () {
   db.all('SELECT min_temp_dob, sred_temp_dob, max_temp_dob FROM dane  WHERE kod_stacji = '+ req.params.kod_stacji
-  + ' AND rok >='
-          + req.params.rokp + " AND rok <= " + req.params.rokz + "AND miesiac >= " + req.params.miesp + " AND miesiac <= "
+  + ' AND rok >= '
+          + req.params.rokp + " AND rok <= " + req.params.rokz + " AND miesiac >= " + req.params.miesp + " AND miesiac <= "
           + req.params.miesz + " AND dzien >= " + req.params.dzienp + " AND dzien <= " + req.params.dzienz,
           function (err, rows) {
             //  console.log(row[1]);
