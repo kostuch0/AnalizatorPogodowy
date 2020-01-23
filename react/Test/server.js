@@ -29,15 +29,24 @@ app.get('/baza', (req, res) =>{
 })
 
 app.get('/baza/temp/:kod_stacji', (req, res) =>{
+  let tempsMin = [];
+  let tempsSr = [];
+  let tempsMax = [];
   let temps = [];
   db.serialize(function () {
-  db.all('SELECT sred_temp_dob FROM dane  WHERE kod_stacji = '+ req.params.kod_stacji,
+  db.all('SELECT min_temp_dob, sred_temp_dob, max_temp_dob FROM dane  WHERE kod_stacji = '+ req.params.kod_stacji,
    function (err, rows) {
 //  console.log(row[1]);
   rows.forEach((row)=>{
-    temps.push(Object.values(row)[0]);
+    tempsMin.push(Object.values(row)[0]);
+    tempsSr.push(Object.values(row)[1]);
+    tempsMax.push(Object.values(row)[2]);
   })
 //  console.log(temps);
+temps.push(tempsMin);
+temps.push(tempsSr);
+temps.push(tempsMax);
+console.log(temps);
   res.json(temps);
    })
   })
