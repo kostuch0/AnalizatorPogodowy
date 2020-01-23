@@ -50,14 +50,18 @@ const Pick = ()=> {
     
   
     <div class='content'>
-    {station &&                
+    {station &&      <a>          
                     
+                    <form>
+                    <input type='date'  min='2001-01-01' max='2020-01-01' name='od'></input>
+                    <input type='date'  min='2001-01-01' max='2020-01-01' name='do'></input>
+                    </form>
                     <select name="stacje" onChange={getChange}>
                       <optgroup label="Stacja">
                         {station.map(station =>
                             <option value={station.kod_stacji} title={station.nazwa_stacji}>{station.Id} - {station.nazwa_stacji}</option>)}
                       </optgroup>
-                    </select>
+                    </select></a>
     }
 
     {!station &&
