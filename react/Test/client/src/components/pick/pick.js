@@ -33,8 +33,13 @@ const Pick = ()=> {
     const loadTemps = async(code) =>{
       temps = [];
       dates = [];
+      var tempDates = [];
       temps = await fetch('/baza/temp/' + code).then(res => res.json());
-      dates = await fetch('/baza/data/' + code).then(res => res.json());
+      tempDates = await fetch('/baza/data/' + code).then(res => res.json());
+      console.log(tempDates);
+
+      tempDates.map(tempDates=>{dates.push(tempDates.rok + "/" + tempDates.miesiac + "/" + tempDates.dzien)})
+
       //console.log("Tablica temperatur: " + temps);
       //console.log("Tablica dat: " + dates);
       setData(temps)
@@ -64,6 +69,7 @@ const Pick = ()=> {
     <a onClick={getStacje}>no ładnie</a>
     }
     {data &&  <Plot
+    
             data={[
               {
                 x: daty,

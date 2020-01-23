@@ -50,7 +50,8 @@ app.get('/baza/data/:kod_stacji', (req, res) =>{
    function (err, rows) {
 //  console.log(rows);
   rows.forEach((row)=>{
-    date.push(Object.values(row)[0] + "/" + Object.values(row)[1] + "/" + Object.values(row)[2]);
+    //date.push(Object.values(row)[0] + "/" + Object.values(row)[1] + "/" + Object.values(row)[2]);
+    date.push(row);
   })
  // console.log(date);
   res.json(date);
