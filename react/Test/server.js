@@ -28,17 +28,32 @@ app.get('/baza', (req, res) =>{
     })
 })
 
-app.get('/baza/:kod_stacji', (req, res) =>{
+app.get('/baza/temp/:kod_stacji', (req, res) =>{
   let temps = [];
   db.serialize(function () {
-  db.all('SELECT max_temp_dob FROM dane  WHERE kod_stacji = '+ req.params.kod_stacji,
+  db.all('SELECT sred_temp_dob FROM dane  WHERE kod_stacji = '+ req.params.kod_stacji,
    function (err, rows) {
 //  console.log(row[1]);
   rows.forEach((row)=>{
     temps.push(Object.values(row)[0]);
   })
-  console.log(temps);
+//  console.log(temps);
   res.json(temps);
+   })
+  })
+})
+
+app.get('/baza/data/:kod_stacji', (req, res) =>{
+  let date = [];
+  db.serialize(function () {
+  db.all('SELECT rok, miesiac, dzien FROM dane  WHERE kod_stacji = '+ req.params.kod_stacji,
+   function (err, rows) {
+//  console.log(rows);
+  rows.forEach((row)=>{
+    date.push(Object.values(row)[0] + "/" + Object.values(row)[1] + "/" + Object.values(row)[2]);
+  })
+ // console.log(date);
+  res.json(date);
    })
   })
 })

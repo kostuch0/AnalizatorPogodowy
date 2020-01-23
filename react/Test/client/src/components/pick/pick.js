@@ -9,6 +9,7 @@ const Pick = ()=> {
     const [daty,setDaty] = useState()
 
     let temps = [];
+    let dates = [];
 
     const getStacje = async() =>{
         setisLoading(true);
@@ -27,9 +28,13 @@ const Pick = ()=> {
  
     const loadTemps = async(code) =>{
       temps = [];
-      temps = await fetch('/baza/' + code).then(res => res.json());
+      dates = [];
+      temps = await fetch('/baza/temp/' + code).then(res => res.json());
+      dates = await fetch('/baza/data/' + code).then(res => res.json());
       console.log("Tablica temperatur: " + temps);
+      console.log("Tablica dat: " + dates);
       setData(temps)
+      setDaty(dates)
     }
 
     if (isLoading) {
@@ -57,7 +62,7 @@ const Pick = ()=> {
     {data &&  <Plot
             data={[
               {
-                x: data,
+                x: daty,
                 y: data,
                 type: 'scatter',
                 mode: 'lines+markers',
