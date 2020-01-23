@@ -6,6 +6,8 @@ const Pick = ()=> {
     const [station, setStation] = useState()
     const [isLoading, setisLoading] = useState(false)
     const [data, setData] = useState()
+    const [daty,setDaty] = useState()
+
     let temps = [];
 
     const getStacje = async() =>{
@@ -17,7 +19,7 @@ const Pick = ()=> {
     }
     const getChange = (e) =>{
       console.log(e.target.value)
-      setData([10,11].push(12))
+      //setData([10,11].push(12))
 
       loadTemps(e.target.value);
       
@@ -27,6 +29,7 @@ const Pick = ()=> {
       temps = [];
       temps = await fetch('/baza/' + code).then(res => res.json());
       console.log("Tablica temperatur: " + temps);
+      setData(temps)
     }
 
     if (isLoading) {
@@ -54,12 +57,13 @@ const Pick = ()=> {
     {data &&  <Plot
             data={[
               {
-                x: [1,2,3,4],
-                y: [111,112,113,114],
+                x: data,
+                y: data,
                 type: 'scatter',
                 mode: 'lines+markers',
                 marker: {color: 'red'},
               },
+              
               
             ]}
             layout={ {width: 800, height: 600, title: 'Piękny wykres danych bez sensu'} }
