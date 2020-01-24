@@ -59,8 +59,12 @@ app.get('/baza/temp/:kod_stacji/:rokp/:miesp/:dzienp/:rokz/:miesz/:dzienz', (req
   let tempsSr = [];
   let tempsMax = [];
   let temps = [];
+  let rok = [];
+  let miesiac = [];
+  let dzien = [];
+
   db.serialize(function () {
-  db.all('SELECT min_temp_dob, sred_temp_dob, max_temp_dob FROM dane  WHERE kod_stacji = '+ req.params.kod_stacji
+  db.all('SELECT min_temp_dob, sred_temp_dob, max_temp_dob, rok, miesiac, dzien FROM dane  WHERE kod_stacji = '+ req.params.kod_stacji
   + ' AND rok >='
           + req.params.rokp + " AND rok <= " + req.params.rokz + " AND (miesiac >= " + req.params.miesp + " OR rok < " + req.params.rokz 
           + ") AND (miesiac <= "  + req.params.miesz + " OR rok > " + req.params.rokp
@@ -71,14 +75,21 @@ app.get('/baza/temp/:kod_stacji/:rokp/:miesp/:dzienp/:rokz/:miesz/:dzienz', (req
                 tempsMin.push(Object.values(row)[0]);
                 tempsSr.push(Object.values(row)[1]);
                 tempsMax.push(Object.values(row)[2]);
+                rok.push(Object.values(row)[3]);
+                miesiac.push(Object.values(row)[4]);
+                dzien.push(Object.values(row)[5]);
               })
             //  console.log(temps);
             temps.push(tempsMin);
             temps.push(tempsSr);
             temps.push(tempsMax);
+            temps.push(rok);
+            temps.push(miesiac);
+            temps.push(dzien);
             console.log(temps[0]);
             console.log(temps[1]);
             console.log(temps[2]);
+            console.log(temps[3]);
               res.json(temps);
                })
               })
