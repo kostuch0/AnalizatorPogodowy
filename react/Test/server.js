@@ -75,9 +75,7 @@ app.get('/baza/temp/:kod_stacji/:rokp/:miesp/:dzienp/:rokz/:miesz/:dzienz', (req
                 tempsMin.push(Object.values(row)[0]);
                 tempsSr.push(Object.values(row)[1]);
                 tempsMax.push(Object.values(row)[2]);
-                rok.push(Object.values(row)[3]);
-                miesiac.push(Object.values(row)[4]);
-                dzien.push(Object.values(row)[5]);
+                rok.push(Object.values(row)[3] + "/" + Object.values(row)[4] + "/" + Object.values(row)[5]);
               })
             //  console.log(temps);
             temps.push(tempsMin);
