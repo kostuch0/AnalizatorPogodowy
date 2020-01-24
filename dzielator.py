@@ -4,7 +4,7 @@ import sqlite3
 import csv
 
 def createDatabase():
-    sql = sqlite3.connect("DanePogodowe2.db")
+    sql = sqlite3.connect("DanePogodowe.db")
     cursor = sql.cursor()
     cursor.execute('''
     create table dane (kod_stacji TEXT,
@@ -36,7 +36,7 @@ def createDatabase():
     sql.close()
     
 def insertData(path:str):
-    sql = sqlite3.connect("DanePogodowe2.db")
+    sql = sqlite3.connect("DanePogodowe.db")
     cursor = sql.cursor()
     with open(path, "r") as file:
         reader = csv.reader(file, 'excel')

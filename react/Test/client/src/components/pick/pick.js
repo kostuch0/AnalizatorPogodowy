@@ -45,7 +45,7 @@ const Pick = ()=> {
       temps = [];
       dates = [];
       var tempDates = [];
-      temps = await fetch('/baza/temp/' + code  ).then(res => res.json());
+      temps = await fetch('/baza/temp/' + code ).then(res => res.json());
       tempDates = await fetch('/baza/data/' + code).then(res => res.json());
       console.log(tempDates);
       //+'/' + dataStart[0] + '/' + dataStart[1] + '/' + dataStart[2] + '/' +dataStop[0]+ '/' + dataStop[1]+ '/' + dataStop[2] 
@@ -61,6 +61,9 @@ const Pick = ()=> {
         return <p>Ładowanie...</p>
     }
     window.addEventListener('load', getStacje);
+   // window.addEventListener('load', loadTemps(252150270));
+    
+    
 
   return (
     
