@@ -82,8 +82,6 @@ app.get('/baza/temp/:kod_stacji/:rokp/:miesp/:dzienp/:rokz/:miesz/:dzienz', (req
             temps.push(tempsSr);
             temps.push(tempsMax);
             temps.push(rok);
-            temps.push(miesiac);
-            temps.push(dzien);
             console.log(temps[0]);
             console.log(temps[1]);
             console.log(temps[2]);
