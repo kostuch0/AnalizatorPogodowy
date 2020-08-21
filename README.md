@@ -1,4 +1,7 @@
 # Analizator
+---
+Narzędzie pobierające dane pogodowe z lat poprzednich i zestawiające je ze sobą na wykresie.
+---
 
 Narzędzia:  
 nodejs - https://nodejs.org/en/  
